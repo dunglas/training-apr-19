@@ -12,7 +12,7 @@ class BookController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
-        return new Response(sprintf('Page: %d</body>', 1));
+        return new Response(sprintf('<body><h1>Books</h1> %d</body>', 1));
     }
 
     /**

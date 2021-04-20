@@ -1,6 +1,3 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-movie_list:
-    path: /movies
-    controller: App\Controller\Movie\MovieList
