@@ -39,7 +39,14 @@ class MovieImportCommand extends Command
             $input->setArgument('title', $io->ask('What\'s the title of the movie to import?'));
         }
 
-        $imdbData = $this->imdbClient->findMovieDetails($title = $input->getArgument('title'));
+        $title = $input->getArgument('title');
+        if (null === $title) {
+            $io->error('The title must be passed explicitly when in non-interactive mode.');
+
+            return Command::FAILURE;
+        }
+
+        $imdbData = $this->imdbClient->findMovieDetails($title);
         if (null === $imdbData) {
             $io->error(sprintf('Movie "%s" not found', $title));
 
@@ -52,6 +59,25 @@ class MovieImportCommand extends Command
 
         $this->entityManager->persist($m);
         $this->entityManager->flush();
+
+        // BATCH IMPORTS
+
+        /*$i = 0;
+        foreach ($batch as $imdbData) {
+            $m = new Movie();
+            $m->setTitle($imdbData['title']);
+            $m->setPoster($imdbData['image']);
+
+            $this->entityManager->persist($m);
+
+            if ($i % 50 === 0) {
+                $this->entityManager->flush();
+                $this->entityManager->clear();
+            }
+            $i++;
+        }
+        $this->entityManager->flush();*/
+
 
         $io->success(sprintf('Movie "%s" successfully imported.', $title));
 
