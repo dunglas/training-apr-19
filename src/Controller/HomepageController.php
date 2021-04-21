@@ -11,10 +11,11 @@ use Twig\Environment;
 #[Route('/')]
 final class HomepageController
 {
+    public function __construct(private int $defaultNumberOfBooks) {}
     public function __invoke(MovieRepository $repository, Environment $twig): Response
     {
         return new Response(
-            $twig->render('movie/index.html.twig', ['movies' => $repository->findLastSix()])
+            $twig->render('movie/index.html.twig', ['movies' => $repository->findLast()])
         );
     }
 }

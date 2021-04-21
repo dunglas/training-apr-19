@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class MovieRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private int $defaultNumberOfBooks)
     {
         parent::__construct($registry, Movie::class);
     }
@@ -51,7 +51,7 @@ class MovieRepository extends ServiceEntityRepository
     /**
      * @return Movie[]
      */
-    public function findLastSix(): iterable
+    public function findLast(): iterable
     {
         return $this
             ->getEntityManager()
@@ -61,7 +61,7 @@ class MovieRepository extends ServiceEntityRepository
     ORDER BY m.id
 DQL
 )
-            ->setMaxResults(6)
+            ->setMaxResults($this->defaultNumberOfBooks)
             ->execute();
     }
 }

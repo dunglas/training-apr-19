@@ -29,7 +29,7 @@ class Book
 
     /**
      * @ORM\ManyToOne(targetEntity=Person::class, inversedBy="books")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
 
