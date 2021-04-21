@@ -27,23 +27,4 @@ class MovieController extends AbstractController
             'movie' => $movie,
         ]);
     }
-
-    #[Route('/create', name: 'create')]
-    public function create(Request $request, ImdbClient $imdbClient): Response
-    {
-        $imdbData = $imdbClient->findMovieDetails($request->get('title'));
-        if (null === $imdbData) {
-            throw new BadRequestException('Unable to found this movie on IMDB');
-        }
-
-        $m = new Movie();
-        $m->setTitle($imdbData['title']);
-        $m->setPoster($imdbData['image']);
-
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($m);
-        $manager->flush();
-
-        return $this->redirectToRoute('movie_detail', ['id' => $m->getId()], Response::HTTP_SEE_OTHER);
-    }
 }
