@@ -8,10 +8,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-#[Route('/')]
+/**
+ * @Route("/")
+ */
 final class HomepageController
 {
-    public function __construct(private int $defaultNumberOfBooks) {}
+    /**
+     * @var int
+     */
+    private $defaultNumberOfBooks;
+
+    public function __construct(int $defaultNumberOfBooks) {
+        $this->defaultNumberOfBooks = $defaultNumberOfBooks;
+    }
+
     public function __invoke(MovieRepository $repository, Environment $twig): Response
     {
         return new Response(

@@ -9,9 +9,16 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class BookManager
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
     public function __construct(
-        private EntityManagerInterface $entityManager,
-    ) {}
+        EntityManagerInterface $entityManager
+    ) {
+        $this->entityManager = $entityManager;
+    }
 
     public function addBook(Book $book)
     {

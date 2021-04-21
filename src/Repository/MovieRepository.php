@@ -14,9 +14,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class MovieRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, private int $defaultNumberOfBooks)
+    /**
+     * @var int
+     */
+    private $defaultNumberOfBooks;
+
+    public function __construct(ManagerRegistry $registry, int $defaultNumberOfBooks)
     {
         parent::__construct($registry, Movie::class);
+        $this->defaultNumberOfBooks = $defaultNumberOfBooks;
     }
 
     // /**

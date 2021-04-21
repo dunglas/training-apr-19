@@ -9,16 +9,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/book', name: 'book_')]
+/**
+ * @Route("/book", name="book_")
+ */
 class BookController extends AbstractController
 {
-    #[Route('/', name: 'index')]
+    /**
+     * @Route("/", name="index")
+     */
     public function index(): Response
     {
         return new Response(sprintf('<body><h1>Books</h1> %d</body>', 1));
     }
 
-    #[Route('/create')]
+    /**
+     * @Route("/create")
+     */
     public function create(Request $request, BookManager $bookManager): Response
     {
         $book = new Book();
