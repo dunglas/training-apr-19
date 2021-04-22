@@ -41,6 +41,11 @@ class User implements UserInterface
      */
     private $y;
 
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $lastLogin;
+
     public function __construct()
     {
         $this->y = new ArrayCollection();
@@ -153,6 +158,18 @@ class User implements UserInterface
                 $y->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastLogin(): ?\DateTimeImmutable
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(?\DateTimeImmutable $lastLogin): self
+    {
+        $this->lastLogin = $lastLogin;
 
         return $this;
     }

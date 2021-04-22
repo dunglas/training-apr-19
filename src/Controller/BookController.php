@@ -37,7 +37,7 @@ class BookController extends AbstractController
 
         $bookManager->addBook($book);
 
-        return new Response(sprintf('Book %d added', $book->getId()));
+        return new Response(sprintf('<body>Book %d added</body>', $book->getId()));
     }
 
     /**
