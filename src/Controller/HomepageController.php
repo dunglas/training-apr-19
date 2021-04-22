@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-#[Route('/')]
+#[Route('/', name: 'homepage')]
 final class HomepageController
 {
     public function __construct(private int $defaultNumberOfBooks) {}

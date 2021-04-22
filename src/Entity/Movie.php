@@ -42,6 +42,11 @@ class Movie
      */
     private $price;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="y")
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Movie
     public function setPrice(?string $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
